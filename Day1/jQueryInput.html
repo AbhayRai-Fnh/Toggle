@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+
+<body>
+    <script>
+        var JqueryClass = function (param) {
+            var _inputDiv;
+            var _input;
+            var _RemoveValue;
+            this.construct = function (param) {
+                _inputDiv = $('<div>');
+                _button = $('<button>');
+                _button.val("Click")
+                _input = $('<input>');
+                _inputDiv.append(_input);
+                _inputDiv.append(_button)
+            }
+
+            this.AddToDom = function () {
+                $('body').append(_inputDiv)
+            }
+
+            this.val = function (val) {
+                if (val) {
+                    return _input.val(val)
+                } else {
+                    return _input.val()
+                }
+            }
+
+            this.RemoveInputValue = function () {
+
+            }
+
+            this.construct(param)
+        }
+        var obj = new JqueryClass();
+    </script>
+</body>
+
+</html>

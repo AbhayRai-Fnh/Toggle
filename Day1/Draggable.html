@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+html
+
+<head>
+    <!-- Other meta tags and links -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<style>
+    .todo-list {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .task-list {
+        list-style-type: none;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 200px;
+        min-height: 100px;
+    }
+
+    li {
+        background-color: #f9f9f9;
+        padding: 8px;
+        margin-bottom: 5px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        cursor: grab;
+    }
+</style>
+
+<body>
+    <div class="todo-list">
+        <h2>Pending Tasks</h2>
+        <ul id="pending-tasks" class="task-list">
+            <li draggable="true">Task 1</li>
+            <li draggable="true">Task 2</li>
+            <li draggable="true">Task 3</li>
+        </ul>
+        <h2>Completed Tasks</h2>
+        <ul id="completed-tasks" class="task-list">
+            <li draggable="true">Task 4</li>
+            <li draggable="true">Task 5</li>
+        </ul>
+    </div>
+    <script>
+        $(document).on("dragstart", "li", function (event) {
+            const taskId = event.target.id;
+            event.originalEvent.dataTransfer.setData("text", taskId);
+            console.log("DragStart")
+        });
+
+        $(document).on("dragover", "ul", function (event) {
+            event.preventDefault();
+            console.log("DragOver")
+        });
+
+        $(document).on("drop", "ul", function (event) {
+            event.preventDefault();
+            const taskId = event.originalEvent.dataTransfer.getData("text");
+            const draggedTask = $("#" + taskId);
+            const targetListId = event.currentTarget.id;
+            if (targetListId === "pending-tasks") {
+                $("#pending-tasks").append(draggedTask);
+            } else if (targetListId === "completed-tasks") {
+                $("#completed-tasks").append(draggedTask);
+            }
+            console.log("Dropped",targetListId)
+        });
+    </script>
+</body>
+
+</html>

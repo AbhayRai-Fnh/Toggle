@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        .toggle-container {
+            display: inline-block;
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background-color: #ccc;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        .toggle-button {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 26px;
+            height: 26px;
+            background-color: #fff;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        /* Styling for the 'on' state of the toggle button */
+        .toggle-container.active .toggle-button {
+            transform: translateX(30px);
+        }
+
+        /* Text styling */
+        .toggle-text {
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 18px;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        var checkboxToggle = function (param) {
+            var _DisplayDiv;
+            var _checkbox;
+            var _textLabel;
+            var _DisplayText;
+            var _ToggelContainer;
+            var _ToggleButton;
+            var _ToggleText;
+            var isActive = false;
+            var _radioInput;
+            this.construct = function (param) {
+                const { controlType } = param;
+                _DisplayDiv = $('<div>');
+                $('body').append(_DisplayDiv)
+                if (controlType == 'checkbox') {
+                    _checkbox = $('<input>');
+                    _checkbox.attr('type', 'checkbox');
+                    // _textLabel = $('<span>');
+                    // _textLabel.text("Do you Smoke");
+                    _DisplayDiv.append(_checkbox)
+                    // _DisplayDiv.append(_textLabel)
+                    console.log(_checkbox)
+                    console.log(_textLabel);
+
+                    _checkbox.click(() => {
+                        isActive = !isActive;
+                        _checkbox.prop('checked', isActive);
+                        this._ToggleTextFunction(isActive)
+                    })
+                    _DisplayText = $('<span>').text("No I Don't smoke")
+                    _DisplayDiv.append(_DisplayText)
+                } else if (controlType == 'switch') {
+                    _ToggleContainer = $("<div>").addClass('toggle-container');
+                    _ToggleButton = $("<div>").addClass('toggle-button');
+                    // _ToggleText = $("<span>").text("OFF");
+
+                    _DisplayDiv.append(_ToggleContainer);
+                    _ToggleContainer.append(_ToggleButton);
+                    _DisplayDiv.append(_ToggleText);
+
+                    _ToggleContainer.click(() => {
+                        isActive = !isActive;
+                        _ToggleContainer.toggleClass('active', isActive);
+                        _ToggleButton.toggleClass('active', isActive);
+                        // _ToggleText.text(isActive ? "ON" : "OFF");
+                        this._ToggleTextFunction(isActive)
+                    });
+                    _DisplayText = $('<span>').text("No I Don't smoke")
+                    _DisplayDiv.append(_DisplayText)
+                } else if (controlType == 'radio') {
+                    var _radioContainer = $('<div>').addClass('radio-container');
+                    var _radioInput1 = $('<input>').attr({ type: 'radio', id: '1', name: "smoke", checked: isActive });
+                    var _radioInput2 = $('<input>').attr({ type: 'radio', id: '2', name: "smoke" });
+                    var _labelInput1 = $('<label>').attr('for', "1").text("Yes I Smoke");
+                    var _labelInput2 = $('<label>').attr('for', "2").text("No I don;t smoke");
+                    _radioContainer.append(_radioInput1, _labelInput1, '<br>', _radioInput2, _labelInput2);
+                    _DisplayDiv.append(_radioContainer);
+
+                    $('input[name="smoke"]').click(() => {
+
+                    })
+
+                }
+
+            }
+
+            this.CheckBoxValue = function (param) {
+                if (param == 1 || param == true) {
+                    _checkbox.prop('checked', true)
+                }
+                else if (param == 0 || param == false)
+                    _checkbox.prop('checked', false)
+                this._ToggleTextFunction()
+            }
+            this._ToggleTextFunction = function (isActive) {
+                _DisplayText.text((_checkbox?.is(":checked") || isActive) ? "Yes I Smoke" : "No I Don't Smoke")
+                _DisplayDiv.append(_DisplayText)
+            }
+            this.construct(param);
+
+
+        }
+    </script>
+</body>
+
+</html>

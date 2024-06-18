@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">Click</button>
+    <script>
+        var btn = document.getElementById('btn');
+        var ClassInput = function () {
+
+            var InputElement;
+
+            this.construct = function () {
+                InputElement = document.createElement('input');
+                InputElement.setAttribute('placeholder', 'Enter Text here...');
+            }
+
+            this._displayInputTag = function () {
+                document.body.appendChild(InputElement)
+            }
+            this.construct()
+        }
+        var obj = new ClassInput;
+        btn.addEventListener('click', () => {
+            obj._displayInputTag()
+        })
+
+    </script>
+</body>
+
+</html>
