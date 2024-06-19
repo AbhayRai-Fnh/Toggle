@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date and Time</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <script>
+        var DateAndTime = function (param) {
+            const { inputType } = param;
+            var _DateInput;
+            var _TimeInput;
+            this.construct = function () {
+                _DateInput = $('<input>');
+                _DateInput.attr('type', 'date');
+                _TimeInput = $('<input>');
+                _TimeInput.attr('type', 'time')
+                if (inputType == 'date') {
+                    $('body').append(_DateInput);
+                    this.init = function (param) {
+                        this.HandleDateInput(param);
+                    }
+                } else {
+                    $('body').append(_TimeInput);
+                    this.init = function (param) {
+                        this.HandleTimeInput(param);
+                    }
+                }
+
+                this.HandleDateInput = function (param) {
+                    const dateRegex = /^\d{4}[-\/\\]\d{2}[-\/\\]\d{2}$/;
+                    _DateInput.val(param)
+                    if (dateRegex.test(param)) {
+                        _DateInput.val(param);
+                    }
+                    else
+                        alert('Please enter valid date DD-MM-YYYY');
+                }
+                this.HandleTimeInput = function (param) {
+                    _TimeInput.val(param)
+                }
+            }
+            this.construct()
+        }
+    </script>
+</body>
+
+</html>
