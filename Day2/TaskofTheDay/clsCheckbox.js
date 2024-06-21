@@ -9,12 +9,16 @@
  * Position : left||top , default right for label
  * label : accepts HTML tag 
  * TextOne/TextTwo : Sets Text content of HTML tag
+ * isActive : returns Boolean ,Default state of the controls 
  * 
  * @param {*} param accepts a JSON obejct
  */
 var clsCheckbox = function (param) {
     var _DisplayDiv;
+    var _DivDescription;
+    var _Description;
     var _checkbox;
+    var _ControlDiv;
     var _DisplayText;
     var _ToggleContainer;
     var _ToggelContainerClass;
@@ -25,11 +29,20 @@ var clsCheckbox = function (param) {
     var _param;
     var _radioContainer;
     var _radioInput1;
-    var _radioInput2
+    var _radioInput2;
+    var _labelInput1;
+    var _labelInput2;
+    // var event; // The custom event that will be created
+
 
     this.construct = function (param) {
         _param = param;
-        isActive=_param.Default;
+        isActive = _param.Default;
+
+        // event = document.createEventObject();
+        // event.eventName = "dataavailable";
+        // event.eventType = "dataavailable";
+
         if (_param.position == 'left') {
             _checkboxClass = 'CheckboxLeft';
             _ToggelContainerClass = 'toggle-containerLeft';
@@ -38,28 +51,35 @@ var clsCheckbox = function (param) {
             _ToggelContainerClass = 'toggle-containerTop'
         }
 
-        _DisplayDiv = $('<div>').addClass('DisplayDiv')
-        $('body').append(_DisplayDiv)
+        _DisplayDiv = $('<div>').addClass('DisplayDiv');
+        _DivDescription = $('<div>');
+        _Description = $('<small>').text("Please fill the below control")
+        _DivDescription.append(_Description);
+        _DisplayDiv.append(_DivDescription);
+        $('body').append(_DisplayDiv);
 
+        _ControlDiv = $('<div>').addClass(_param.position == undefined || _param.position == "right" ? "containerDivClass" : "")
         switch (_param.controlType) {
             case 'checkbox':
                 _checkbox = $('<input>');
                 _checkbox.attr('type', 'checkbox').addClass(!_param.SuppressLabel ? _checkboxClass : "");
                 _checkbox.prop('checked', isActive);
                 _checkbox.attr('title', 'Do you smoke');
-                _DisplayDiv.append(_checkbox);
+                _ControlDiv.append(_checkbox)
+                _DisplayDiv.append(_ControlDiv);
 
                 this._SuppressLabel(_param.SuppressLabel, _param.position, _param.label);
                 this._ToggleTextFunction(isActive, _param.TextOne, _param.TextTwo);
 
-                _DisplayText?.text((_checkbox?.is(":checked") || isActive) ? _param.TextOne : _param.TextTwo);
+                // _DisplayText?.text((_checkbox?.is(":checked") || isActive) ? _param.TextOne : _param.TextTwo);
 
                 _checkbox.click(() => {
                     isActive = !isActive;
                     _checkbox.prop('checked', isActive);
-
-                    this._ToggleTextFunction(isActive, _param.TextOne, _param.TextTwo)
+                    this._ToggleTextFunction(isActive, _param.TextOne, _param.TextTwo);
+                    _checkbox.trigger('Event_Change', [isActive]);
                 })
+
                 break;
 
             case 'switch':
@@ -67,44 +87,76 @@ var clsCheckbox = function (param) {
                 _ToggleButton = $("<div>").addClass('toggle-button');
                 _ToggleButton.attr('title', 'Do you smoke');
 
-                _DisplayDiv.append(_ToggleContainer);
+                _ControlDiv.append(_ToggleContainer);
                 _ToggleContainer.append(_ToggleButton);
                 _ToggleContainer.toggleClass('active', isActive);
-                    _ToggleButton.toggleClass('active', isActive);
-                _DisplayDiv.append(_ToggleText);
+                _ToggleButton.toggleClass('active', isActive);
+                _DisplayDiv.append(_ControlDiv);
 
                 this._SuppressLabel(_param.SuppressLabel, _param.position, _param.label)
                 this._ToggleTextFunction(isActive, _param.TextOne, _param.TextTwo)
 
-                _ToggleContainer.click(() => {
-                    console.log("Toggle Clicked")
+                // _DisplayText?.text((_checkbox?.is(":checked") || isActive) ? _param.TextOne : _param.TextTwo);
+
+                // _ToggleContainer.on('click',test)
+                _ToggleContainer.on('click', () => {
                     isActive = !isActive;
                     _ToggleContainer.toggleClass('active', isActive);
                     _ToggleButton.toggleClass('active', isActive);
-                    this._ToggleTextFunction(isActive, _param.TextOne, _param.TextTwo)
-
+                    this._ToggleTextFunction(isActive, _param.TextOne, _param.TextTwo);
+                    _ToggleContainer.trigger('Event_Change', [isActive]);
                 });
+
                 break;
 
             case 'radio':
-                var radioDefault;
-                _radioContainer = $('<div>').addClass('radio-container');
+                _radioContainer = $('<div>').addClass('radio-container').attr('title', "Do you smoke");
 
-                _radioInput1 = $('<input>').attr({ type: 'radio', id: 'success-outlined', name: "options-outlined", checked: isActive }).addClass("btn-check");
-                _radioInput2 = $('<input>').attr({ type: 'radio', id: 'danger-outlined', name: "options-outlined", autocomplete: "off",checked: !isActive }).addClass("btn-check");
+                _radioInput1 = $('<input>').attr({ type: 'radio', id: 'success-outlined' + _param.id, name: "options-outlined", checked: isActive }).addClass("btn-check");
+                _radioInput2 = $('<input>').attr({ type: 'radio', id: 'danger-outlined' + _param.id, name: "options-outlined", autocomplete: "off", checked: !isActive }).addClass("btn-check");
                 _radioInput2.addClass("btn-check")
 
-                var _labelInput1 = $('<label>').attr({ for: "success-outlined", class: "btn btn-outline-success" }).text("No I don't Smoke");
-                var _labelInput2 = $('<label>').attr({ for: "danger-outlined", class: "btn btn-outline-danger" }).text("Yes I Smoke");
+                _labelInput1 = $('<label>').attr({ for: "success-outlined" + _param.id, class: "btn btn-outline-success" }).text("");
+                _labelInput2 = $('<label>').attr({ for: "danger-outlined" + _param.id, class: "btn btn-outline-danger" }).text("");
 
                 _radioContainer.append(_radioInput1, _labelInput1, '<br>', _radioInput2, _labelInput2);
-                _DisplayDiv.append(_radioContainer);
+                _ControlDiv.append(_radioContainer);
+                _DisplayDiv.append(_ControlDiv);
+
+                this._SuppressLabel(_param.SuppressLabel, _param.position, _param.label);
+                this._ToggleTextFunction(isActive, _param.TextOne, _param.TextTwo);
+
+                _radioInput1.on('change', () => {
+                    if (_radioInput1.is(':checked')) {
+                        isActive = true;
+                        this._ToggleTextFunction(isActive, _param.TextOne, _param.TextTwo);
+                        _radioInput1.trigger('Event_Change', [isActive]);
+                    }
+                });
+
+                _radioInput2.on('change', () => {
+                    if (_radioInput2.is(':checked')) {
+                        isActive = false;
+                        this._ToggleTextFunction(isActive, _param.TextOne, _param.TextTwo);
+                        _radioInput2.trigger('Event_Change', [isActive]);
+                    }
+                });
                 break;
 
             default:
                 alert("Please Enter Valid ControlType")
         }
+        /**
+         * Event_Change - Event Handler fires whenever the value changes for all checkbox, switch & radio
+         */
+        $(_checkbox).on('Event_Change', eventChange);
+        $(_ToggleContainer).on('Event_Change', eventChange);
+        $(_radioInput1).on('Event_Change', eventChange)
+        $(_radioInput2).on('Event_Change', eventChange)
+    }
 
+    eventChange = (event, isActive) => {
+        console.log(`Element of type ${_param.controlType} changed to ${isActive}`);
 
     }
 
@@ -117,6 +169,10 @@ var clsCheckbox = function (param) {
 
     this._ToggleTextFunction = function (isActive, TextOne, TextTwo) {
         _DisplayText?.text((_checkbox?.is(":checked") || isActive) ? TextOne : TextTwo)
+        if (_param.controlType == 'radio') {
+            _labelInput1.text(TextOne);
+            _labelInput2.text(TextTwo);
+        }
     }
 
     /**
@@ -126,10 +182,11 @@ var clsCheckbox = function (param) {
      * @param {*} label  It sets the element to the label
      */
 
-    this._SuppressLabel = function (SuppressLabel, position, label) {
+    this._SuppressLabel = function (SuppressLabel = false, position, label) {
         if (!SuppressLabel) {
             _DisplayText = $(label).addClass(position);
-            _DisplayDiv.append(_DisplayText);
+            if (_param.controlType != 'radio')
+                _ControlDiv.append(_DisplayText);
         }
     }
 
@@ -148,7 +205,7 @@ var clsCheckbox = function (param) {
                     return _ToggleContainer.hasClass("active");
 
                 case 'radio':
-                    return $('input[name=options-outlined]:checked')[0].checked;
+                    return $('input[name=options-outlined]:checked')[0].checked; // No selector
 
             }
         } else {
@@ -156,20 +213,96 @@ var clsCheckbox = function (param) {
                 case 'checkbox':
                     _checkbox.prop('checked', param);
                     isActive = param;
-                    this._ToggleTextFunction(isActive, _param.TextOne, _param.TextTwo)
+                    this._ToggleTextFunction(isActive, _param.TextOne, _param.TextTwo);
+
+                    _checkbox.trigger('Event_Change', [isActive]);
+                    console.log(document.dispatchEvent(new CustomEvent("Event_Change", { "detail": "test" }))) // creates event and returns true
                     break;
                 case 'switch':
                     param ? _ToggleContainer.addClass("active") : _ToggleContainer.removeClass("active");
                     isActive = param;
-                    this._ToggleTextFunction(isActive, _param.TextOne, _param.TextTwo)
+                    this._ToggleTextFunction(isActive, _param.TextOne, _param.TextTwo);
+
+                    _ToggleContainer.trigger('Event_Change', [isActive]);
+
+                    console.log(document.dispatchEvent(new CustomEvent("Event_Change", { "detail": "test" })));
+
                     break;
                 case 'radio':
                     param ? _radioInput1.prop('checked', true) : _radioInput2.prop('checked', true);
+
+                    console.log(document.dispatchEvent(new CustomEvent("Event_Change", { "detail": "test" })));
             }
         }
 
     }
 
+    this.clear = function () {
+        switch (_param.controlType) {
+            case 'checkbox':
+                _checkbox.prop('checked', _param.Default);
+                break;
+            case 'switch':
+                _param.Default ? _ToggleContainer.addClass("active") : _ToggleContainer.removeClass("active");
+                break;
+            case 'radio':
+                _param.Default ? _radioInput1.prop('checked', true) : _radioInput2.prop('checked', true);
+
+        }
+    }
+
+    this.label = function (TextOne, TextTwo) {
+        _param.TextOne = TextOne;
+        _param.TextTwo = TextTwo;
+        this._ToggleTextFunction(isActive, _param.TextOne, _param.TextTwo);
+    }
+
+    this.isFilled = function () {
+        switch (_param.controlType) {
+            case "checkbox":
+                return isActive;
+            case "switch":
+                return isActive;
+            case "radio":
+                return _radioInput1[0].checked || _radioInput2[0].checked;
+        }
+    }
+
+    this.toolTipText = function (toolTipText) {
+        switch (_param.controlType) {
+            case "checkbox":
+                _checkbox.attr('title', toolTipText);
+                break;
+            case "switch":
+                _ToggleButton.attr('title', toolTipText);
+                break;
+            case "radio":
+                _radioContainer.attr('title', toolTipText);
+                break;
+        }
+    }
+
+    this.isDirty = function () {
+        if (_param.Default != isActive)
+            isActive = true;
+        switch (_param.controlType) {
+            case "checkbox":
+                _checkbox.prop('checked', isActive);
+                break;
+            case "switch":
+                isActive ? _ToggleContainer.addClass("active") : _ToggleContainer.removeClass("active");
+                break;
+            case "radio":
+                isActive ? _radioInput1.prop('checked', true) : _radioInput2.prop('checked', true);
+                break;
+        }
+    }
+
     this.construct(param);
 
+}
+
+function test(e) {
+    console.log('test print')
+    console.log(e)
 }
