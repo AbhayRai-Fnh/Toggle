@@ -20,3 +20,13 @@ Abstraction
 Encapsulation
 Inheritance
 Polymorphism
+
+
+    // this.CheckBoxValue = function (param) {
+    //     if (param == 1 || param == true) {
+    //         _checkbox.prop('checked', true)
+    //     }
+    //     else if (param == 0 || param == false)
+    //         _checkbox.prop('checked', false)
+    //     this._ToggleTextFunction()
+    // }
