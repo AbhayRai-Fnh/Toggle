@@ -1,115 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
     <style>
-        .toggle-container {
-            display: inline-block;
-            position: relative;
-            width: 60px;
-            height: 30px;
+      .toggle-container {
+        display: inline-block;
+        position: relative;
+        width: 60px;
+        height: 30px;
 
-            background-color: #ccc;
-            border-radius: 15px;
-            cursor: pointer;
-        }
+        background-color: #ccc;
+        border-radius: 15px;
+        cursor: pointer;
+      }
 
-        .toggle-button {
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 26px;
-            height: 26px;
-            background-color: #fff;
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-        }
+      .toggle-button {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 26px;
+        height: 26px;
+        background-color: #fff;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+      }
 
-        /* Styling for the 'on' state of the toggle button */
-        .toggle-container.active .toggle-button {
-            transform: translateX(30px);
-        }
+      /* Styling for the 'on' state of the toggle button */
+      .toggle-container.active .toggle-button {
+        transform: translateX(30px);
+      }
 
-        /* Text styling */
-        .toggle-text {
-            display: inline-block;
-            margin-left: 10px;
-            font-size: 18px;
-            font-family: Arial, sans-serif;
-        }
+      /* Text styling */
+      .toggle-text {
+        display: inline-block;
+        margin-left: 10px;
+        font-size: 18px;
+        font-family: Arial, sans-serif;
+      }
 
-        .right {
-            position: static;
-        }
+      .right {
+        position: static;
+      }
 
-        .DisplayDiv {
-            margin-top: 20px;
-            margin-left: 10px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            /* justify-content: center; */
-            /* align-items: center; */
-        }
+      .DisplayDiv {
+        margin-top: 20px;
+        margin-left: 10px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        /* justify-content: center; */
+        /* align-items: center; */
+      }
 
-        .CheckboxLeft {
-            position: relative;
-            margin-left: 150px;
-        }
+      .CheckboxLeft {
+        position: relative;
+        margin-left: 150px;
+      }
 
-        .toggle-containerLeft {
-            margin-left: 163px;
-        }
+      .toggle-containerLeft {
+        margin-left: 163px;
+      }
 
-        .CheckboxTop {
-            position: relative;
-            margin-top: 20px;
-        }
+      .CheckboxTop {
+        position: relative;
+        margin-top: 20px;
+      }
 
-        .toggle-containerTop {
-            margin-top: 28px;
-        }
+      .toggle-containerTop {
+        margin-top: 28px;
+      }
 
-        .left {
-            position: absolute;
-            left: 26px;
-        }
+      .left {
+        position: absolute;
+        left: 26px;
+      }
 
-        .top {
-            position: absolute;
-            top: 22px;
-            left: 0px;
-        }
+      .top {
+        position: absolute;
+        top: 22px;
+        left: 0px;
+      }
 
-        .containerDivClass {
-            display: flex;
-            gap: 5px;
-            align-items: center;
-        }
+      .containerDivClass {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+      }
 
-        .radio-container {
-            display: flex;
-            width: 281px;
-            margin-left: 10px;
-            gap: 10px;
-        }
+      .radio-container {
+        display: flex;
+        width: 281px;
+        margin-left: 10px;
+        gap: 10px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    <script src="clsCheckbox.js">
-
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-</body>
-
+  <body>
+    <script src="clsCheckbox.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
