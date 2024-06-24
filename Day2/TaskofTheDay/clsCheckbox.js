@@ -10,10 +10,12 @@
  * label : accepts HTML tag
  * TextOne/TextTwo : Sets Text content of HTML tag
  * isActive : returns Boolean ,Default state of the controls
+ * Default : Set the default value of controls
+ * id : set the id for the radio controls
  *
  * @param {*} param accepts a JSON obejct
  */
-var clsCheckbox = function (param) {
+ let clsCheckbox = function (param) {
   var _DisplayDiv;
   var _DivDescription;
   var _Description;
@@ -48,8 +50,8 @@ var clsCheckbox = function (param) {
     _DivDescription = $("<div>");
     _Description = $("<small>").text("Please fill the below control");
     _DivDescription.append(_Description);
-    _DisplayDiv.append(_DivDescription);
-    $("body").append(_DisplayDiv);
+    _param.controlType?_DisplayDiv.append(_DivDescription):"";
+    // $("body").append(_DisplayDiv);
 
     _ControlDiv = $("<div>").addClass(
       _param.position == undefined || _param.position == "right"
@@ -253,13 +255,7 @@ var clsCheckbox = function (param) {
           _checkbox.prop("checked", param);
           isActive = param;
           this._ToggleTextFunction(isActive, _param.TextOne, _param.TextTwo);
-
           _checkbox.trigger("Event_Change", [isActive]);
-          console.log(
-            document.dispatchEvent(
-              new CustomEvent("Event_Change", { detail: "test" })
-            )
-          ); // creates event and returns true
           break;
         case "switch":
           param
@@ -267,9 +263,7 @@ var clsCheckbox = function (param) {
             : _ToggleContainer.removeClass("active");
           isActive = param;
           this._ToggleTextFunction(isActive, _param.TextOne, _param.TextTwo);
-
           _ToggleContainer.trigger("Event_Change", [isActive]);
-
           break;
         case "radio":
           param
@@ -278,6 +272,10 @@ var clsCheckbox = function (param) {
       }
     }
   };
+
+  /**
+   * Reset the value to default value
+   */
 
   this.clear = function () {
     switch (_param.controlType) {
@@ -297,11 +295,23 @@ var clsCheckbox = function (param) {
     }
   };
 
+  /**
+   *
+   * @param {*} TextOne label text content for true
+   * @param {*} TextTwo label text content for false
+   * Edit the label text content
+   */
+
   this.label = function (TextOne, TextTwo) {
     _param.TextOne = TextOne;
     _param.TextTwo = TextTwo;
     this._ToggleTextFunction(isActive, _param.TextOne, _param.TextTwo);
   };
+
+  /**
+   *
+   * @returns Boolean , Whether there is value in the obhect
+   */
 
   this.isFilled = function () {
     switch (_param.controlType) {
@@ -313,6 +323,11 @@ var clsCheckbox = function (param) {
         return _radioInput1[0].checked || _radioInput2[0].checked;
     }
   };
+
+  /**
+   *
+   * @param {*} toolTipText Edit the title text content on mmouseover
+   */
 
   this.toolTipText = function (toolTipText) {
     switch (_param.controlType) {
@@ -327,6 +342,10 @@ var clsCheckbox = function (param) {
         break;
     }
   };
+
+  /**
+   * sets the property to true if any changes take place to the default value return Boolean
+   */
 
   this.isDirty = function () {
     if (_param.Default != isActive) isActive = true;
@@ -347,5 +366,10 @@ var clsCheckbox = function (param) {
     }
   };
 
+  this.getDesign=function () {
+    return _DisplayDiv;
+  }
+
   this.construct(param);
 };
+
