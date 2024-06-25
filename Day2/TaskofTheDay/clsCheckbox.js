@@ -34,8 +34,8 @@ let clsCheckbox = function (param) {
 
   this.construct = function (param) {
     _param = param;
-    isActive = _param.Default;
-
+    if (_param.Default) isActive = _param.Default;
+    if (_param.controlType == undefined) _param.controlType = "checkbox";
     if (_param.position == "left") {
       _checkboxClass = "CheckboxLeft";
       _ToggelContainerClass = "toggle-containerLeft";
@@ -113,6 +113,7 @@ let clsCheckbox = function (param) {
         break;
 
       case "radio":
+        if (!_param.id) break;
         _radioContainer = $("<div>")
           .addClass("radio-container")
           .attr("title", "Do you smoke");
@@ -182,9 +183,6 @@ let clsCheckbox = function (param) {
           }
         });
         break;
-
-      default:
-        alert("Please Enter Valid ControlType");
     }
     /**
      * Event_Change - Event Handler fires whenever the value changes for all controlType: checkbox, switch & radio
