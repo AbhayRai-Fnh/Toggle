@@ -1,6 +1,5 @@
 let objArr = [];
 let obj = $("<div>");
-objArr.push(new clsCheckbox({}));
 
 /**Label */
 objArr.push(
@@ -8,16 +7,29 @@ objArr.push(
     controlType: "switch",
     label: "<small>",
     Default: false,
-  }).label("Yes", "No")
+    Desc:"Do you smoke"
+  })
 );
 objArr.push(
-  new clsCheckbox({ controlType: "checkbox", label: "<small>" }).label(
-    "Yes",
-    "No"
-  )
+  new clsCheckbox({
+    controlType: "checkbox",
+    label: "<small>",
+    TextOne: "Yes",
+    TextTwo: "No",
+    Default: true,
+    Desc:"Do you smoke"
+  })
 );
 objArr.push(
-  new clsCheckbox({ controlType: "radio", label: "<small>" }).label("Yes", "No")
+  new clsCheckbox({
+    controlType: "radio",
+    label: "<small>",
+    TextOne: "Yes",
+    TextTwo: "No",
+    Default: true,
+    id:"12",
+    Desc:"Do you smoke"
+  })
 );
 
 /**Default Values */
@@ -26,21 +38,31 @@ objArr.push(
     controlType: "switch",
     label: "<small>",
     Default: true,
-  }).label("Yes", "No")
+    TextOne: "Yes",
+    TextTwo: "No",
+    Desc:"Do you smoke"
+  })
 );
 objArr.push(
   new clsCheckbox({
     controlType: "checkbox",
     label: "<small>",
     Default: true,
-  }).label("Yes", "No")
+    TextOne: "Yes",
+    TextTwo: "No",
+    Desc:"Do you smoke"
+  })
 );
 objArr.push(
   new clsCheckbox({
     controlType: "radio",
     label: "<small>",
-    Default: true,
-  }).label("Yes", "No")
+    Default: false,
+    TextOne: "Yes",
+    TextTwo: "No",
+    id:"13",
+    Desc:"Do you smoke"
+  })
 );
 
 /**Suppresslabel */
@@ -50,7 +72,10 @@ objArr.push(
     label: "<small>",
     Default: true,
     SuppressLabel: true,
-  }).label("Yes", "No")
+    TextOne: "Yes",
+    TextTwo: "No",
+    Desc:"Do you smoke"
+  })
 );
 objArr.push(
   new clsCheckbox({
@@ -58,7 +83,10 @@ objArr.push(
     label: "<small>",
     Default: true,
     SuppressLabel: true,
-  }).label("Yes", "No")
+    TextOne: "Yes",
+    TextTwo: "No",
+    Desc:"Do you smoke"
+  })
 );
 objArr.push(
   new clsCheckbox({
@@ -66,7 +94,11 @@ objArr.push(
     label: "<small>",
     Default: true,
     SuppressLabel: true,
-  }).label("Yes", "No")
+    TextOne: "Yes",
+    TextTwo: "No",
+    id:"14",
+    Desc:"Do you smoke"
+  })
 );
 
 /**Alignment */
@@ -76,7 +108,10 @@ objArr.push(
     label: "<small>",
     Default: true,
     position: "left",
-  }).label("Yes", "No")
+    TextOne: "Yes",
+    TextTwo: "No",
+    Desc:"Do you smoke"
+  })
 );
 objArr.push(
   new clsCheckbox({
@@ -84,7 +119,10 @@ objArr.push(
     label: "<small>",
     Default: true,
     position: "top",
-  }).label("Yes", "No")
+    TextOne: "Yes",
+    TextTwo: "No",
+    Desc:"Do you smoke"
+  })
 );
 
 objArr.push(
@@ -93,7 +131,10 @@ objArr.push(
     label: "<small>",
     Default: true,
     position: "left",
-  }).label("Yes", "No")
+    TextOne: "Yes",
+    TextTwo: "No",
+    Desc:"Do you smoke"
+  })
 );
 objArr.push(
   new clsCheckbox({
@@ -101,11 +142,17 @@ objArr.push(
     label: "<small>",
     Default: true,
     position: "top",
-  }).label("Yes", "No")
+    TextOne: "Yes",
+    TextTwo: "No",
+    Desc:"Do you smoke"
+  })
 );
+console.log(objArr);
 objArr.forEach(function (x, i, arr) {
-    console.log(x)
- $('body').append(x.getDesign())
+  console.log(x.clear())
+  console.log(x.isFilled())
+  
+  $("body").append(x.getDesign());
 });
 
 // $("body").append(obj);

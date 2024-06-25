@@ -1,6 +1,4 @@
 /**
- *
- *
  * Example
  * {controlType:"radio",SuppressLabel:false,position:"left",label:"<small>",TextOne:"Hello I Am Abhay",TextTwo:"Hello Two"}
  *
@@ -15,7 +13,7 @@
  *
  * @param {*} param accepts a JSON obejct
  */
- let clsCheckbox = function (param) {
+let clsCheckbox = function (param) {
   var _DisplayDiv;
   var _DivDescription;
   var _Description;
@@ -48,10 +46,10 @@
 
     _DisplayDiv = $("<div>").addClass("DisplayDiv");
     _DivDescription = $("<div>");
-    _Description = $("<small>").text("Please fill the below control");
+    _Description = $("<small>").text(_param.Desc);
     _DivDescription.append(_Description);
-    _param.controlType?_DisplayDiv.append(_DivDescription):"";
-    // $("body").append(_DisplayDiv);
+    _param.controlType ? _DisplayDiv.append(_DivDescription) : "";
+    $("body").append(_DisplayDiv);
 
     _ControlDiv = $("<div>").addClass(
       _param.position == undefined || _param.position == "right"
@@ -366,10 +364,9 @@
     }
   };
 
-  this.getDesign=function () {
+  this.getDesign = function () {
     return _DisplayDiv;
-  }
+  };
 
   this.construct(param);
 };
-
