@@ -15,9 +15,8 @@
       .toggle-container {
         display: inline-block;
         position: relative;
-        width: 60px;
-        height: 30px;
-
+        width: 57px;
+        height: 26px;
         background-color: #ccc;
         border-radius: 15px;
         cursor: pointer;
@@ -27,8 +26,8 @@
         position: absolute;
         top: 2px;
         left: 2px;
-        width: 26px;
-        height: 26px;
+        width: 22px;
+        height: 22px;
         background-color: #fff;
         border-radius: 50%;
         transition: transform 0.3s ease;
@@ -64,11 +63,11 @@
 
       .CheckboxLeft {
         position: relative;
-        margin-left: 150px;
+        margin-left: 60px;
       }
 
       .toggle-containerLeft {
-        margin-left: 163px;
+        margin-left: 65px;
       }
 
       .CheckboxTop {
@@ -83,11 +82,12 @@
       .left {
         position: absolute;
         left: 26px;
+        top: 29px;
       }
 
       .top {
         position: absolute;
-        top: 22px;
+        top: 25px;
         left: 0px;
       }
 
@@ -103,15 +103,52 @@
         margin-left: 10px;
         gap: 10px;
       }
+      /* .divClass{
+        display: flex;
+        gap: 5px;
+        margin-top: 5px;
+        width: 100%;
+      }
+      .labelClass{
+        width:30%;
+        text-align: end;
+      }
+      .inputClass {
+        width: 70%;
+      } */
     </style>
   </head>
 
   <body>
+    <!-- <div class="divClass">
+      <label for="" class="labelClass">Username:</label>
+      <input type="text" class="inputClass">
+    </div> -->
+    <div>
+      <select name="basic" id="basic">
+        <option value="" >Hello</option>
+        <option value="" selected="selected">world</option>
+        <option value="">Earth</option>
+        <option value="">Hello</option>
+        <option value="">world</option>
+        <option value="">Earth</option>
+      </select>
+      <input type="range" min="0" max="10" step="1" value="5" id="InputRange">
+    </div>
     <script src="clsCheckbox.js"></script>
+    <script src="Runner.js"></script>
+    <script>
+      let InputRange=document.getElementById('InputRange');
+      InputRange.addEventListener('change',()=>{
+        console.log(InputRange.value)
+      })
+      console.log(InputRange)
+    </script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    x
   </body>
 </html>
